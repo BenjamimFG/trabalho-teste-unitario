@@ -97,4 +97,22 @@ public class BancoTest {
 		assertEquals(-100, contaOrigem.getSaldo());
 		assertEquals(100, contaDestino.getSaldo());
 	}
+
+	@Test
+	public void deveEfetuarTransferenciaContasCorrenteEPoupanca() throws ContaSemSaldoException, ContaNaoExistenteException {
+		Cliente cliente = new Cliente("Joao");
+		Conta contaOrigem = new Conta(cliente, 123, 0, TipoConta.CORRENTE);
+		
+		Cliente cliente2 = new Cliente("Maria");
+		Conta contaDestino = new Conta(cliente2, 456, 0, TipoConta.POUPANCA);
+		
+		Banco banco = new Banco(Arrays.asList(contaOrigem, contaDestino));
+
+
+		banco.efetuarTransferencia(contaOrigem.getNumeroConta(), contaDestino.getNumeroConta(), 100);
+
+
+		assertEquals(-100, contaOrigem.getSaldo());
+		assertEquals(100, contaDestino.getSaldo());
+	}
 }

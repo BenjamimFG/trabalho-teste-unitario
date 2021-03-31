@@ -130,4 +130,23 @@ public class BancoTest {
 		assertEquals(0, contaDestino.getSaldo());
 		Assert.fail();
 	}
+
+	@Test(expected = ContaSemSaldoException.class)
+	public void naoDevePermitirContaPoupancaComSaldoNegativo() throws ContaSemSaldoException, ContaNaoExistenteException {
+		Cliente cliente = new Cliente("Joao");
+		Conta contaOrigem = new Conta(cliente, 123, 0, TipoConta.POUPANCA);
+		
+		Cliente cliente2 = new Cliente("Maria");
+		Conta contaDestino = new Conta(cliente2, 456, 0, TipoConta.CORRENTE);
+		
+		Banco banco = new Banco(Arrays.asList(contaOrigem, contaDestino));
+
+
+		banco.efetuarTransferencia(contaOrigem.getNumeroConta(), contaDestino.getNumeroConta(), 100);
+
+
+		assertEquals(0, contaDestino.getSaldo());
+		assertEquals(0, contaOrigem.getSaldo());
+		Assert.fail();
+	}
 }

@@ -59,6 +59,25 @@ public class BancoTest {
 		Assert.fail();
 	}
 
+	@Test(expected = ContaJaExistenteException.class)
+	public void naoDeveCadastrarContaNomeRepetido() throws ContaJaExistenteException, ContaNumeroInvalidoException {
+
+		// Cenario
+		Cliente cliente = new Cliente("Joao");
+		Conta conta1 = new Conta(cliente, 123, 0, TipoConta.CORRENTE);
+
+		Cliente cliente2 = new Cliente("Joao");
+		Conta conta2 = new Conta(cliente2, 456, 0, TipoConta.POUPANCA);
+
+		Banco banco = new Banco();
+
+		// Ação
+		banco.cadastrarConta(conta1);
+		banco.cadastrarConta(conta2);
+
+		Assert.fail();
+	}
+
 	@Test
 	public void deveEfetuarTransferenciaContasCorrentes() throws ContaSemSaldoException, ContaNaoExistenteException {
 

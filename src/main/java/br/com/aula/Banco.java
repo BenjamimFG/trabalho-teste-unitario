@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.aula.exception.ContaJaExistenteException;
 import br.com.aula.exception.ContaNaoExistenteException;
 import br.com.aula.exception.ContaSemSaldoException;
+import br.com.aula.exception.ContaNumeroInvalidoException;
 
 public class Banco {
 
@@ -19,7 +20,11 @@ public class Banco {
 	}
 
 
-	public void cadastrarConta(Conta conta) throws ContaJaExistenteException {
+	public void cadastrarConta(Conta conta) throws ContaJaExistenteException, ContaNumeroInvalidoException {
+
+		if (conta.getNumeroConta() < 0) {
+			throw new ContaNumeroInvalidoException();
+		}
 
 		for (Conta c : contas) {
 			boolean isNomeClienteIgual = c.getCliente().getNome().equals(conta.getCliente().getNome());

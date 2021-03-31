@@ -10,11 +10,12 @@ import org.junit.Test;
 import br.com.aula.exception.ContaJaExistenteException;
 import br.com.aula.exception.ContaNaoExistenteException;
 import br.com.aula.exception.ContaSemSaldoException;
+import br.com.aula.exception.ContaNumeroInvalidoException;
 
 public class BancoTest {
 
 	@Test
-	public void deveCadastrarConta() throws ContaJaExistenteException {
+	public void deveCadastrarConta() throws ContaJaExistenteException, ContaNumeroInvalidoException {
 
 		// Cenario
 		Cliente cliente = new Cliente("Joao");
@@ -29,7 +30,7 @@ public class BancoTest {
 	}
 
 	@Test(expected = ContaJaExistenteException.class)
-	public void naoDeveCadastrarContaNumeroRepetido() throws ContaJaExistenteException {
+	public void naoDeveCadastrarContaNumeroRepetido() throws ContaJaExistenteException, ContaNumeroInvalidoException {
 
 		// Cenario
 		Cliente cliente = new Cliente("Joao");
@@ -43,6 +44,17 @@ public class BancoTest {
 		// Ação
 		banco.cadastrarConta(conta1);
 		banco.cadastrarConta(conta2);
+
+		Assert.fail();
+	}
+
+	@Test(expected = ContaNumeroInvalidoException.class)
+	public void naoDeveCadastrarContaNumeroInvalido() throws ContaJaExistenteException, ContaNumeroInvalidoException {
+		Cliente cliente = new Cliente("Joao");
+		Conta conta = new Conta(cliente, -5, 0, TipoConta.CORRENTE);
+		Banco banco = new Banco();
+
+		banco.cadastrarConta(conta);
 
 		Assert.fail();
 	}

@@ -1,8 +1,8 @@
-[🇺🇸 EN-US](README.md)
+[EN-US](README.md)
 ___
 # Trabalho de Testes Unitários
 > Trabalho referente à disciplina de Teste e Validação de Sistemas.  
-> Cenário dos testes é uma aplicação simples de um banco que possui 3 classes primárias: Banco, Cliente e Conta.
+> Cenário dos testes é uma aplicação simples de um banco que possui 3 classes primárias: Banco, Cliente e Conta.  
 
 ## Introduction
 > Testes referentes à classe [`Banco`](src/main/java/br/com/aula/Banco.java) realizados na classe [`BancoTest`](src/test/java/br/com/aula/BancoTest.java)  
